@@ -5,7 +5,7 @@
       <v-col cols="12" md="7">
         <v-card>
           <v-img height="300px" src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-img>
-          <v-card-title>Top western road trips</v-card-title>
+          <v-card-title class="card-title">Top western road trips</v-card-title>
           <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
           <div class="d-flex justify-end">
             <v-btn color="orange" class="mr-3 mb-3">Explore</v-btn>
@@ -29,7 +29,7 @@
                     <v-card class="v-card-styles">
                       <div class="d-flex flex-no-wrap justify-space-between">
                         <div class="content-container">
-                          <v-card-title class="text-h6 wrap">{{ item.title.rendered }}</v-card-title>
+                          <v-card-title class="card-title">{{ item.title.rendered }}</v-card-title>
                           <v-card-actions>
                             <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Mas</v-btn>
                             <div class="ml-3">
@@ -53,7 +53,7 @@
                     <v-card class="v-card-styles">
                       <div class="d-flex flex-no-wrap justify-space-between">
                         <div class="content-container">
-                          <v-card-title class="text-h6 wrap">{{ item.title.rendered }}</v-card-title>
+                          <v-card-title class="card-title">{{ item.title.rendered }}</v-card-title>
                           <v-card-actions>
                             <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Mas</v-btn>
                             <div class="ml-3">
@@ -77,7 +77,7 @@
                     <v-card class="v-card-styles">
                       <div class="d-flex flex-no-wrap justify-space-between">
                         <div class="content-container">
-                          <v-card-title class="text-body-1 wrap">{{ item.title.rendered }}</v-card-title>
+                          <v-card-title class="card-title">{{ item.title.rendered }}</v-card-title>
                           <v-card-actions>
                             <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Mas</v-btn>
                             <div class="ml-3">
@@ -172,6 +172,10 @@ export default {
 </script>
 
 <style scoped>
+.card-title {
+  font-size: 0.8rem;
+}
+
 .hero-container {
   width: 90%;
   margin: 0 auto;
