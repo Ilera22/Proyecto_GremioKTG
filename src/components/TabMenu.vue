@@ -5,7 +5,7 @@
       <v-col cols="12" md="7">
         <v-card>
           <v-img height="300px" src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-img>
-          <v-card-title>{{ item.title.rendered }}</v-card-title>
+          <v-card-title>Titulo1</v-card-title>
           <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
           <div class="d-flex justify-end">
             <v-btn color="orange" class="mr-3 mb-3">Explore</v-btn>
