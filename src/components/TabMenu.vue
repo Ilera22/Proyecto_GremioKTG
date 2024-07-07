@@ -173,7 +173,7 @@ export default {
 
 <style scoped>
 .card-title {
-  font-size: 0.8rem;
+  font-size: 1rem;
   white-space: normal;
   overflow-wrap: break-word;
 }
