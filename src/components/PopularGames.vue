@@ -27,8 +27,8 @@
     data() {
       return {
         images: [
-          { src: require('@/assets/HonkaiStarRail-Feature-image.jpg'), title: "Honkai StarRail", link: "https://example.com/local" }, // Ruta de la imagen local
-          { src: require('@/assets/HonkaiStarRail-Feature-image.jpg'), title: "Image 2", link: "https://example.com/2" },
+          { src: require('@/assets/HonkaiStarRail-Feature-image.jpg'), title: "Honkai StarRail", link: "https://wp.gremioktg.com/honkai-star-rail/" }, // Ruta de la imagen local
+          { src: require('@/assets/ZenlessZoneZero-Feature-image.png'), title: "Zenless Zone Zero", link: "https://wp.gremioktg.com/zenless-zone-zero/" },
           { src: require('@/assets/HonkaiStarRail-Feature-image.jpg'), title: "Image 3", link: "https://example.com/3" },
           { src: require('@/assets/HonkaiStarRail-Feature-image.jpg'), title: "Image 4", link: "https://example.com/4" }
         ]
