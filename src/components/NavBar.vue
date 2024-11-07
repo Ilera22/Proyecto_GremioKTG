@@ -9,14 +9,11 @@
       <img src="path/to/logo.png" alt="Logo" />
     </div>
 
-    <div class="search" v-if="!isCollapsed">
-      <input type="text" v-model="searchQuery" placeholder="Buscar..." @input="onSearch" />
-    </div>
-
     <nav class="menu">
       <ul>
-        <li v-for="item in filteredItems" :key="item.id" @click="navigate(item)">
+        <li v-for="item in items" :key="item.id" @click="navigate(item)">
           <img :src="item.icon" alt="Icono del juego" />
+          <span v-if="!isCollapsed">{{ item.name }}</span>
         </li>
       </ul>
     </nav>
@@ -24,41 +21,24 @@
 </template>
 
 <script>
-import { getAllItems } from '~/services/api';
-
 export default {
   data() {
     return {
       isCollapsed: true,
-      searchQuery: '',
       items: [
         { id: 1, name: 'Diablo IV', icon: 'path/to/diablo-icon.png' },
         { id: 2, name: 'World of Warcraft', icon: 'path/to/wow-icon.png' },
+        { id: 3, name: 'Elden Ring', icon: 'path/to/elden-ring-icon.png' },
+        // Añade más juegos según lo necesites
       ],
     };
-  },
-  computed: {
-    filteredItems() {
-      return this.items.filter(item =>
-        item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    },
   },
   methods: {
     toggleSidebar() {
       this.isCollapsed = !this.isCollapsed;
     },
-    async onSearch() {
-      if (this.searchQuery.length > 2) {
-        const response = await getAllItems();
-        this.items = response.filter(item => 
-          item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      } else {
-        this.items = await getAllItems();
-      }
-    },
     navigate(item) {
+      // Lógica para navegación. Esto puede depender de Vue Router.
       this.$router.push({ name: 'game-page', params: { id: item.id } });
     },
   },
@@ -67,6 +47,7 @@ export default {
 
 <style>
 .sidebar {
+  background-color: var(--sidebar-bg);
   position: fixed;
   left: 0;
   top: 0;
@@ -75,16 +56,42 @@ export default {
   transition: width 0.3s;
   overflow: hidden;
 }
+
 .sidebar--collapsed {
   width: 250px;
 }
+
 .toggle-button {
-  color: #fff;
+  background: none;
+  border: none;
+  color: var(--accent-color);
   cursor: pointer;
+  margin: 10px;
 }
-.search input {
-  width: 100%;
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu ul li {
+  display: flex;
+  align-items: center;
   padding: 10px;
-  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.menu ul li:hover {
+  background-color: var(--hover-color);
+}
+
+.menu ul li img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.menu ul li span {
+  color: var(--text-color);
 }
 </style>
