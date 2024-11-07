@@ -3,8 +3,8 @@
     <v-row class="hero-container pa-3">
       <div style="height: 300px;"></div>
       <v-col cols="12" md="7">
-        <v-card color="primary">
-          <v-responsive aspect-ratio="16:9" class="video-container" style="height: 100%;">
+        <v-card color="primary" style="height: 100%;">
+          <v-responsive aspect-ratio="16:9" class="video-container" >
             <v-img
               v-if="!videoLoaded"
               src="https://img.youtube.com/vi/ZZ5LpwO-An4/maxresdefault.jpg"
