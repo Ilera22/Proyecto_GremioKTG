@@ -10,12 +10,12 @@
         <v-list-item nav>
           <template v-slot:prepend>
             <v-avatar>
-              <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Avatar" />
+              <img src="Ilera22/Proyecto_GremioKTG/src/assets/logo_ktg.png" alt="Avatar" />
             </v-avatar>
           </template>
 
           <template v-slot:title>
-            John Leider
+            gremioktg
           </template>
 
           <template v-slot:append>
