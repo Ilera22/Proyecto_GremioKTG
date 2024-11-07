@@ -207,7 +207,7 @@ export default {
 
 .video-container {
   width: 100%;
-  height: 56.25%;
+  height: 100%;
 }
 
 .video-placeholder {
