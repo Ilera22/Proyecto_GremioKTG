@@ -1,13 +1,13 @@
 <template>
   <v-main>
     <v-row class="hero-container pa-3">
-      <div style="height: 300px;"></div>
+      <div color="primary" style="min-height: 600px;"></div>
       <v-col cols="12" md="7">
-        <v-card color="primary" style="height: 100%;">
-          <v-responsive aspect-ratio="16:9" class="video-container" >
+        <v-card class="hero-video-container">
+          <v-responsive aspect-ratio="16:9" class="video-container">
             <v-img
               v-if="!videoLoaded"
-              src="https://img.youtube.com/vi/ZZ5LpwO-An4/maxresdefault.jpg"
+              :src="thumbnailUrl"
               cover
               class="video-placeholder"
               alt="Video placeholder"
@@ -128,8 +128,18 @@ export default {
       analysisPosts: [],
       recentPosts: [],
       videoLoaded: false,
-      videoUrl: '', // URL del video se configura tras el clic
+      videoId: 'ZZ5LpwO-An4', // ID del video
     };
+  },
+  computed: {
+    // URL de la miniatura basada en el ID del video
+    thumbnailUrl() {
+      return `https://img.youtube.com/vi/${this.videoId}/maxresdefault.jpg`;
+    },
+    // URL del video en YouTube
+    videoUrl() {
+      return `https://www.youtube.com/embed/${this.videoId}?autoplay=1`;
+    },
   },
   mounted() {
     this.fetchNewsPosts();
@@ -138,9 +148,7 @@ export default {
   },
   methods: {
     loadVideo() {
-      // Configura la URL para cargar el video solo tras el clic
-      this.videoUrl = "https://www.youtube.com/embed/ZZ5LpwO-An4?autoplay=1";
-      this.videoLoaded = true;
+      this.videoLoaded = true; // Carga el video al hacer clic
     },
     async fetchNewsPosts() {
       try {
@@ -207,6 +215,11 @@ export default {
   margin: 0 auto;
   border-radius: 25px;
   background-color: rgba(71, 71, 71, 0.479);
+}
+
+.hero-video-container {
+  height: 100%;
+  min-height: 600px;
 }
 
 .video-container {
