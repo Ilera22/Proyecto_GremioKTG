@@ -2,7 +2,7 @@
   <v-main>
     <v-row class="hero-container pa-3">
       <div color="primary" class="hero-video-container"></div>
-      <v-col cols="12" md="7" >
+      <v-col cols="12" md="7" min-height="800PX">
         <v-card>
           <v-responsive aspect-ratio="16:9" class="video-container">
             <iframe width="100%" min-height="600PX" 
@@ -10,8 +10,8 @@
             title="YouTube video player" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen></iframe>
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
           </v-responsive>
         </v-card>
       </v-col>
