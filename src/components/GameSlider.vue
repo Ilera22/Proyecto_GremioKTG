@@ -61,17 +61,17 @@ export default {
       try {
         const response = await axios.get('https://wp.gremioktg.com/wp-json/wp/v2/posts', {
           params: {
-            category: '21', // Tag ID del juego (Throne and Liberty)
-            post_tag: '25', // Tag ID para guías
             per_page: 10,
+            categories: 21, // Filtrar por categoría de Throne and Liberty
+            tags: 25,       // Filtrar por tipo de post de guías
             _embed: true
           }
         });
 
-        console.log('API Response:', response.data); // Añadir esta línea para depuración
+        console.log('API Response:', response.data); // Verificación en consola
 
         if (response.data.length === 0) {
-          console.warn('No posts found with the specified tags.');
+          console.warn('No posts found with the specified category and tag.');
         }
 
         const posts = response.data.map(post => ({
