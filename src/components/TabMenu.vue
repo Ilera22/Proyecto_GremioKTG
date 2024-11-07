@@ -3,22 +3,20 @@
     <v-row class="hero-container pa-3">
       <div style="height: 300px;"></div>
       <v-col cols="12" md="7">
-        <v-card>
-          <v-responsive aspect-ratio="16/9" class="video-container">
+        <v-card color="primary">
+          <v-responsive aspect-ratio="16:9" class="video-container" style="height: 100%;">
             <v-img
               v-if="!videoLoaded"
               src="https://img.youtube.com/vi/ZZ5LpwO-An4/maxresdefault.jpg"
-              @click="loadVideo"
               cover
               class="video-placeholder"
               alt="Video placeholder"
             ></v-img>
             <iframe
               v-else
-              src="https://www.youtube.com/embed/ZZ5LpwO-An4"
+              src="https://www.youtube.com/embed/ZZ5LpwO-An4?autoplay=0"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
               class="video-iframe"
             ></iframe>
           </v-responsive>
