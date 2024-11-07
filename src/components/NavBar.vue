@@ -26,9 +26,9 @@ export default {
     return {
       isCollapsed: true,
       items: [
-        { id: 1, name: 'Diablo IV', icon: 'path/to/diablo-icon.png' },
-        { id: 2, name: 'World of Warcraft', icon: 'path/to/wow-icon.png' },
-        { id: 3, name: 'Elden Ring', icon: 'path/to/elden-ring-icon.png' },
+        { id: 1, name: 'Diablo IV', icon: '@/assets/logo_ktg.png' },
+        { id: 2, name: 'World of Warcraft', icon: '@/assets/logo_ktg.png' },
+        { id: 3, name: 'Elden Ring', icon: '@/assets/logo_ktg.png' },
         // Añade más juegos según lo necesites
       ],
     };
