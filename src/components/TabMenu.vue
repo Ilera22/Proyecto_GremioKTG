@@ -195,8 +195,11 @@ export default {
   background-color: rgba(71, 71, 71, 0.479);
 }
 
+
+/* este cambia la altura del video igual arriba hay un style que le hace el cambio en el mismo atributo hay que revizar cual afecta */
 .video-container {
   width: 100%;
+  height:fit-content;
   min-height: 500px;
 }
 
