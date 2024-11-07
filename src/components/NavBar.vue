@@ -1,98 +1,90 @@
 <template>
-    <div>
-      <!-- Navigation Drawer -->
-      <v-navigation-drawer v-model="drawer" app temporary>
-        <v-list>
-          <v-list-item v-for="item in items" :key="item.title">
-            <v-list-item-content>
-              <v-list-item-title class="title">{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-  
-      <!-- App Bar -->
-      <v-row class="align-center no-gutters">
-        <v-col cols="auto" class="burguer-menu">
-          <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
-        </v-col>
-        <v-col cols="auto">
-          <v-app-bar-title>
-            <img
-              :src="logoSrc"
-              alt="Logo"
-              style="max-height: 50px; max-width: 50px;"
-              class="mt-2"
-            />
-          </v-app-bar-title>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="12" md="5">
-          <v-text-field
-            v-model="search"
-            density="compact"
-            label="Search"
-            append-inner-icon="mdi-magnify"
-            variant="outlined"
-            flat
-            hide-details
-            single-line
-            class="mx-2"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-  
-      <!-- Menu Button Row -->
-      <v-row bg-color="deep-purple-accent-4" class="justify-center align-center">
-        <v-col  class="menu-btn-container">
-          <v-btn variant="text" v-for="(item, index) in items" :key="index">{{ item.title }}</v-btn>
-        </v-col>
-      </v-row>
+  <aside :class="['sidebar', { 'sidebar--collapsed': isCollapsed }]">
+    <button class="toggle-button" @click="toggleSidebar">
+      <i v-if="isCollapsed" class="fas fa-chevron-right"></i>
+      <i v-else class="fas fa-chevron-left"></i>
+    </button>
+
+    <div class="logo" v-if="!isCollapsed">
+      <img src="path/to/logo.png" alt="Logo" />
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: "NavBar",
-    data() {
-      return {
-        search: '',
-        drawer: false,
-        items: [
-          { title: 'Dropdown 1' },
-          { title: 'Dropdown 2' },
-          { title: 'Dropdown 3' },
-          { title: 'Dropdown 4' },
-          { title: 'Dropdown 5' },
-        ],
-        logoSrc: require('@/assets/logo_ktg.png') // Asegúrate de que la ruta sea correcta
-      };
+
+    <div class="search" v-if="!isCollapsed">
+      <input type="text" v-model="searchQuery" placeholder="Buscar..." @input="onSearch" />
+    </div>
+
+    <nav class="menu">
+      <ul>
+        <li v-for="item in filteredItems" :key="item.id" @click="navigate(item)">
+          <img :src="item.icon" alt="Icono del juego" />
+        </li>
+      </ul>
+    </nav>
+  </aside>
+</template>
+
+<script>
+import { getAllItems } from '~/services/api';
+
+export default {
+  data() {
+    return {
+      isCollapsed: true,
+      searchQuery: '',
+      items: [
+        { id: 1, name: 'Diablo IV', icon: 'path/to/diablo-icon.png' },
+        { id: 2, name: 'World of Warcraft', icon: 'path/to/wow-icon.png' },
+      ],
+    };
+  },
+  computed: {
+    filteredItems() {
+      return this.items.filter(item =>
+        item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     },
-    methods: {
-      toggleDrawer() {
-        this.drawer = !this.drawer;
+  },
+  methods: {
+    toggleSidebar() {
+      this.isCollapsed = !this.isCollapsed;
+    },
+    async onSearch() {
+      if (this.searchQuery.length > 2) {
+        const response = await getAllItems();
+        this.items = response.filter(item => 
+          item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      } else {
+        this.items = await getAllItems();
       }
-    }
-  };
-  </script>
-  
-  <style scoped>
-  .burguer-menu {
-    visibility: hidden;
-  }
-  
-  .menu-btn-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  @media only screen and (max-width: 767px) {
-    .burguer-menu {
-      visibility: visible;
-    }
-  
-    .menu-btn-container {
-      display: none;
-    }
-  }
-  </style>
+    },
+    navigate(item) {
+      this.$router.push({ name: 'game-page', params: { id: item.id } });
+    },
+  },
+};
+</script>
+
+<style>
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 80px;
+  height: 100vh;
+  transition: width 0.3s;
+  overflow: hidden;
+}
+.sidebar--collapsed {
+  width: 250px;
+}
+.toggle-button {
+  color: #fff;
+  cursor: pointer;
+}
+.search input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+</style>

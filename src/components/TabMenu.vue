@@ -196,11 +196,11 @@ export default {
 }
 
 
-/* este cambia la altura del video igual arriba hay un style que le hace el cambio en el mismo atributo hay que revizar cual afecta */
+/* este cambia la altura del video igual este es el v-responsive style="min-height: 500px;" */
 .video-container {
   width: 100%;
   height:fit-content;
-  min-height: 500px;
+  min-height: 600px;
 }
 
 .video-placeholder {
