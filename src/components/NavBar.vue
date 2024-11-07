@@ -1,17 +1,23 @@
 <template>
   <v-card>
-    <v-layout>
+    <v-container fluid>
       <v-navigation-drawer
         v-model="drawer"
         :rail="rail"
         permanent
         @click="rail = false"
       >
-        <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-          title="John Leider"
-          nav
-        >
+        <v-list-item nav>
+          <template v-slot:prepend>
+            <v-avatar>
+              <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Avatar" />
+            </v-avatar>
+          </template>
+
+          <template v-slot:title>
+            John Leider
+          </template>
+
           <template v-slot:append>
             <v-btn
               icon="mdi-chevron-left"
@@ -25,7 +31,7 @@
 
         <v-list density="compact" nav>
           <v-list-item
-            prepend-icon="mdi-home-city"
+            prepend-icon="mdi-home"
             title="Home"
             value="home"
           ></v-list-item>
@@ -41,17 +47,21 @@
           ></v-list-item>
         </v-list>
       </v-navigation-drawer>
-    </v-layout>
+    </v-container>
   </v-card>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        drawer: true,
-        rail: true,
-      }
-    },
-  }
+export default {
+  data() {
+    return {
+      drawer: true,
+      rail: true,
+    }
+  },
+}
 </script>
+
+<style scoped>
+/* Puedes agregar estilos personalizados aquí */
+</style>
