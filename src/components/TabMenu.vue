@@ -4,14 +4,16 @@
       <div style="background-color: var(--v-theme-primary); height: 300px;"></div>
       <v-col cols="12" md="7">
         <v-card color="teal">
-          <v-responsive aspect-ratio="16:9" class="video-container" style="min-height: 1300px;"></>
-            <iframe width="100%" min-height="100%" 
-            src="https://www.youtube.com/embed/oAMG-mcXl_E?si=avXUDdHRJLMSmY21" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin">
-          </iframe>
+          <v-responsive aspect-ratio="16:9" class="video-container" style="min-height: 1300px;">
+            <iframe 
+              width="100%" 
+              style="min-height: 100%;" 
+              src="https://www.youtube.com/embed/oAMG-mcXl_E?si=avXUDdHRJLMSmY21" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
           </v-responsive>
         </v-card>
       </v-col>
@@ -117,19 +119,7 @@ export default {
       newsPosts: [],
       analysisPosts: [],
       recentPosts: [],
-      videoLoaded: false,
-      videoId: 'ZZ5LpwO-An4', // ID del video
     };
-  },
-  computed: {
-    // URL de la miniatura basada en el ID del video
-    thumbnailUrl() {
-      return `https://img.youtube.com/vi/${this.videoId}/maxresdefault.jpg`;
-    },
-    // URL del video en YouTube
-    videoUrl() {
-      return `https://www.youtube.com/embed/${this.videoId}?autoplay=1`;
-    },
   },
   mounted() {
     this.fetchNewsPosts();
@@ -137,9 +127,6 @@ export default {
     this.fetchRecentPosts();
   },
   methods: {
-    loadVideo() {
-      this.videoLoaded = true; // Carga el video al hacer clic
-    },
     async fetchNewsPosts() {
       try {
         const response = await axios.get(
@@ -207,7 +194,6 @@ export default {
   border-radius: 25px;
   background-color: rgba(71, 71, 71, 0.479);
 }
-
 
 .video-container {
   width: 100%;
