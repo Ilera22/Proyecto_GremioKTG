@@ -1,18 +1,19 @@
 <template>
   <aside :class="['sidebar', { 'sidebar--collapsed': isCollapsed }]">
-    <button class="toggle-button" @click="toggleSidebar">
-      <i v-if="isCollapsed" class="fas fa-chevron-right"></i>
-      <i v-else class="fas fa-chevron-left"></i>
-    </button>
-
-    <div class="logo" v-if="!isCollapsed">
-      <img src="@/assets/logo_ktg.png" alt="Logo" />
+    <div class="sidebar-header">
+      <div class="logo">
+        <img src="@/assets/logo_ktg.png" alt="Logo" />
+      </div>
+      <button class="toggle-button" @click="toggleSidebar">
+        <i v-if="isCollapsed" class="fas fa-chevron-right"></i>
+        <i v-else class="fas fa-chevron-left"></i>
+      </button>
     </div>
 
     <nav class="menu">
       <ul>
         <li v-for="item in items" :key="item.id" @click="navigate(item)">
-          <img :src="item.icon" alt="Icono del juego" />
+          <img :src="require(`${item.icon}`)" alt="Icono del juego" />
           <span v-if="!isCollapsed">{{ item.name }}</span>
         </li>
       </ul>
@@ -38,7 +39,6 @@ export default {
       this.isCollapsed = !this.isCollapsed;
     },
     navigate(item) {
-      // Lógica para navegación. Esto puede depender de Vue Router.
       this.$router.push({ name: 'game-page', params: { id: item.id } });
     },
   },
@@ -61,12 +61,23 @@ export default {
   width: 250px;
 }
 
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.logo img {
+  width: 40px;
+  height: auto;
+}
+
 .toggle-button {
   background: none;
   border: none;
   color: var(--accent-color);
   cursor: pointer;
-  margin: 10px;
 }
 
 .menu ul {
