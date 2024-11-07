@@ -1,9 +1,9 @@
 <template>
   <v-main>
     <v-row class="hero-container pa-3">
-      <div color="primary" style="min-height: 600px;"></div>
+      <div color="primary" style="min-height: 600px;" class="hero-video-container"></div>
       <v-col cols="12" md="7">
-        <v-card class="hero-video-container">
+        <v-card >
           <v-responsive aspect-ratio="16:9" class="video-container">
             <v-img
               v-if="!videoLoaded"
