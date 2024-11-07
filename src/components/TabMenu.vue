@@ -4,100 +4,38 @@
       <div style="height: 300px;"></div>
       <v-col cols="12" md="7">
         <v-card>
-          
-          <v-responsive aspect-ratio="16/9">
-    <iframe
-      src="https://www.youtube.com/embed/ZZ5LpwO-An4"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
-  </v-responsive>
-
+          <v-responsive aspect-ratio="16/9" class="video-container">
+            <v-img
+              v-if="!videoLoaded"
+              src="https://img.youtube.com/vi/ZZ5LpwO-An4/maxresdefault.jpg"
+              @click="loadVideo"
+              cover
+              class="video-placeholder"
+              alt="Video placeholder"
+            ></v-img>
+            <iframe
+              v-else
+              src="https://www.youtube.com/embed/ZZ5LpwO-An4"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="video-iframe"
+            ></iframe>
+          </v-responsive>
         </v-card>
       </v-col>
 
       <v-col cols="12" md="5">
         <v-card>
           <v-tabs v-model="tab" bg-color="primary" align-tabs="center">
-            <v-tab value="one">Noticias</v-tab>
-            <v-tab value="two">Analisis</v-tab>
-            <v-tab value="three">Top</v-tab>
+            <v-tab value="one">News</v-tab>
+            <v-tab value="two">Reviews</v-tab>
+            <v-tab value="three">Hot</v-tab>
           </v-tabs>
 
           <v-card-text>
             <v-window v-model="tab">
-              <v-window-item value="one">
-                <v-row>
-                  <v-col v-for="(item, index) in recentPosts" :key="index" cols="12" class="py-1">
-                    <v-card class="v-card-styles">
-                      <div class="d-flex flex-no-wrap justify-space-between">
-                        <div class="content-container">
-                          <v-card-title class="card-title wrap">{{ item.title.rendered }}</v-card-title>
-                          <v-card-actions>
-                            <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Mas</v-btn>
-                            <div class="ml-3">
-                              <v-icon small class="mr-1">mdi-clock-outline</v-icon>
-                              {{ formatDate(item.date) }}
-                            </div>
-                          </v-card-actions>
-                        </div>
-                        <v-avatar rounded="0" size="100">
-                          <v-img :src="item.featured_image" cover></v-img>
-                        </v-avatar>
-                      </div>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-window-item>
-
-              <v-window-item value="two">
-                <v-row>
-                  <v-col v-for="(item, index) in guidePosts" :key="index" cols="12" class="py-1">
-                    <v-card class="v-card-styles">
-                      <div class="d-flex flex-no-wrap justify-space-between">
-                        <div class="content-container">
-                          <v-card-title class="card-title wrap">{{ item.title.rendered }}</v-card-title>
-                          <v-card-actions>
-                            <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Mas</v-btn>
-                            <div class="ml-3">
-                              <v-icon small class="mr-1">mdi-clock-outline</v-icon>
-                              {{ formatDate(item.date) }}
-                            </div>
-                          </v-card-actions>
-                        </div>
-                        <v-avatar rounded="0" size="100">
-                          <v-img :src="item.featured_image" cover></v-img>
-                        </v-avatar>
-                      </div>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-window-item>
-
-              <v-window-item value="three">
-                <v-row>
-                  <v-col v-for="(item, index) in topPosts" :key="index" cols="12" class="py-1">
-                    <v-card class="v-card-styles">
-                      <div class="d-flex flex-no-wrap justify-space-between">
-                        <div class="content-container">
-                          <v-card-title class="card-title wrap">{{ item.title.rendered }}</v-card-title>
-                          <v-card-actions>
-                            <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Mas</v-btn>
-                            <div class="ml-3">
-                              <v-icon small class="mr-1">mdi-clock-outline</v-icon>
-                              {{ formatDate(item.date) }}
-                            </div>
-                          </v-card-actions>
-                        </div>
-                        <v-avatar rounded="0" size="100">
-                          <v-img :src="item.featured_image" cover></v-img>
-                        </v-avatar>
-                      </div>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-window-item>
+              <!-- Contenido de las pestañas aquí -->
             </v-window>
           </v-card-text>
         </v-card>
@@ -109,7 +47,6 @@
 <script>
 import axios from 'axios';
 import { format } from 'date-fns';
-import { VResponsive } from 'vuetify/components';
 
 export default {
   name: 'TabMenu',
@@ -119,6 +56,7 @@ export default {
       recentPosts: [],
       guidePosts: [],
       topPosts: [],
+      videoLoaded: false,
     };
   },
   mounted() {
@@ -127,6 +65,9 @@ export default {
     this.fetchTopPosts();
   },
   methods: {
+    loadVideo() {
+      this.videoLoaded = true;
+    },
     async fetchRecentPosts() {
       try {
         const response = await axios.get('https://wp.gremioktg.com/wp-json/wp/v2/posts?per_page=4&_embed=true');
@@ -177,15 +118,29 @@ export default {
 </script>
 
 <style scoped>
-.card-title {
-  font-size: 1rem;
-}
-
 .hero-container {
   width: 90%;
   margin: 0 auto;
   border-radius: 25px;
   background-color: rgba(71, 71, 71, 0.479);
+}
+
+.video-container {
+  width: 100%;
+}
+
+.video-placeholder {
+  cursor: pointer;
+  height: 100%;
+}
+
+.video-iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.card-title {
+  font-size: 1rem;
 }
 
 .content-container {
