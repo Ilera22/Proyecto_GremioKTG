@@ -2,24 +2,16 @@
   <v-main>
     <v-row class="hero-container pa-3">
       <div color="primary" class="hero-video-container"></div>
-      <v-col cols="12" md="7">
-        <v-card >
+      <v-col cols="12" md="7" >
+        <v-card>
           <v-responsive aspect-ratio="16:9" class="video-container">
-            <v-img
-              v-if="!videoLoaded"
-              :src="thumbnailUrl"
-              cover
-              class="video-placeholder"
-              alt="Video placeholder"
-              style="cursor: pointer;"
-            ></v-img>
-            <iframe
-              v-else
-              :src="videoUrl"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              class="video-iframe"
-            ></iframe>
+            <iframe width="100%" min-height="600PX" 
+            src="https://www.youtube.com/embed/oAMG-mcXl_E?si=avXUDdHRJLMSmY21" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen></iframe>
           </v-responsive>
         </v-card>
       </v-col>
@@ -216,8 +208,8 @@ export default {
 }
 
 .hero-video-container {
-  height: 100%;
-  min-height: 1920px;
+  height: fit-content;
+  min-height: 500px;
 }
 
 .video-container {
