@@ -10,7 +10,7 @@
         <v-list-item nav>
           <template v-slot:prepend>
             <v-avatar>
-              <img src="Ilera22/Proyecto_GremioKTG/src/assets/logo_ktg.png" alt="Avatar" />
+              <img src='@/assets/logo_ktg.png' alt="Avatar" />
             </v-avatar>
           </template>
 
