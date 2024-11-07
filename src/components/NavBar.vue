@@ -6,7 +6,7 @@
     </button>
 
     <div class="logo" v-if="!isCollapsed">
-      <img src="path/to/logo.png" alt="Logo" />
+      <img src="@/assets/logo_ktg.png" alt="Logo" />
     </div>
 
     <nav class="menu">
