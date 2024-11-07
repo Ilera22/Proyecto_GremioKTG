@@ -4,7 +4,7 @@
       <div style="background-color: var(--v-theme-primary); height: 300px;"></div>
       <v-col cols="12" md="7">
         <v-card color="teal">
-          <v-responsive aspect-ratio="16:9" class="video-container" style="min-height: 1300px;">
+          <v-responsive aspect-ratio="16:9" class="video-container" style="min-height: 500px;">
             <iframe 
               width="100%" 
               style="min-height: 100%;" 
@@ -197,8 +197,7 @@ export default {
 
 .video-container {
   width: 100%;
-  min-height: 600px;
-  background-color: yellow;
+  min-height: 500px;
 }
 
 .video-placeholder {
