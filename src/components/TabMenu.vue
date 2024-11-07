@@ -1,11 +1,11 @@
 <template>
   <v-main>
     <v-row class="hero-container pa-3">
-      <div color="primary" class="hero-video-container"></div>
-      <v-col cols="12" md="7" min-height="800PX">
+      <div color="primary" style="height:300px"></div>
+      <v-col cols="12" md="7" style="min-height:800">
         <v-card>
           <v-responsive aspect-ratio="16:9" class="video-container">
-            <iframe width="100%" min-height="600PX" 
+            <iframe width="100%" min-height="100%" 
             src="https://www.youtube.com/embed/oAMG-mcXl_E?si=avXUDdHRJLMSmY21" 
             title="YouTube video player" 
             frameborder="0" 
@@ -202,19 +202,16 @@ export default {
 <style scoped>
 .hero-container {
   width: 90%;
+  min-height: 500px;
   margin: 0 auto;
   border-radius: 25px;
   background-color: rgba(71, 71, 71, 0.479);
 }
 
-.hero-video-container {
-  height: fit-content;
-  min-height: 500px;
-}
 
 .video-container {
   width: 100%;
-  height: 100%;
+  min-height: 600px;
 }
 
 .video-placeholder {
