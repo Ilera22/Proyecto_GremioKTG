@@ -11,12 +11,15 @@
               cover
               class="video-placeholder"
               alt="Video placeholder"
+              @click="loadVideo"
+              style="cursor: pointer;"
             ></v-img>
             <iframe
               v-else
-              src="https://www.youtube.com/embed/ZZ5LpwO-An4?autoplay=0"
+              :src="videoUrl"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
               class="video-iframe"
             ></iframe>
           </v-responsive>
@@ -125,6 +128,7 @@ export default {
       analysisPosts: [],
       recentPosts: [],
       videoLoaded: false,
+      videoUrl: '', // URL del video se configura tras el clic
     };
   },
   mounted() {
@@ -134,6 +138,8 @@ export default {
   },
   methods: {
     loadVideo() {
+      // Configura la URL para cargar el video solo tras el clic
+      this.videoUrl = "https://www.youtube.com/embed/ZZ5LpwO-An4?autoplay=1";
       this.videoLoaded = true;
     },
     async fetchNewsPosts() {
