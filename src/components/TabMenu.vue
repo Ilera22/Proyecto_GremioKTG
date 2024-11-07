@@ -28,14 +28,84 @@
       <v-col cols="12" md="5">
         <v-card>
           <v-tabs v-model="tab" bg-color="primary" align-tabs="center">
-            <v-tab value="one">News</v-tab>
-            <v-tab value="two">Reviews</v-tab>
-            <v-tab value="three">Hot</v-tab>
+            <v-tab value="news">Noticias</v-tab>
+            <v-tab value="analysis">Análisis</v-tab>
+            <v-tab value="recent">Top</v-tab>
           </v-tabs>
 
           <v-card-text>
             <v-window v-model="tab">
-              <!-- Contenido de las pestañas aquí -->
+              <v-window-item value="news">
+                <v-row>
+                  <v-col v-for="(item, index) in newsPosts" :key="index" cols="12" class="py-1">
+                    <v-card class="v-card-styles">
+                      <div class="d-flex flex-no-wrap justify-space-between">
+                        <div class="content-container">
+                          <v-card-title class="card-title wrap">{{ item.title.rendered }}</v-card-title>
+                          <v-card-actions>
+                            <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Más</v-btn>
+                            <div class="ml-3">
+                              <v-icon small class="mr-1">mdi-clock-outline</v-icon>
+                              {{ formatDate(item.date) }}
+                            </div>
+                          </v-card-actions>
+                        </div>
+                        <v-avatar rounded="0" size="100">
+                          <v-img :src="item.featured_image" cover></v-img>
+                        </v-avatar>
+                      </div>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-window-item>
+
+              <v-window-item value="analysis">
+                <v-row>
+                  <v-col v-for="(item, index) in analysisPosts" :key="index" cols="12" class="py-1">
+                    <v-card class="v-card-styles">
+                      <div class="d-flex flex-no-wrap justify-space-between">
+                        <div class="content-container">
+                          <v-card-title class="card-title wrap">{{ item.title.rendered }}</v-card-title>
+                          <v-card-actions>
+                            <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Más</v-btn>
+                            <div class="ml-3">
+                              <v-icon small class="mr-1">mdi-clock-outline</v-icon>
+                              {{ formatDate(item.date) }}
+                            </div>
+                          </v-card-actions>
+                        </div>
+                        <v-avatar rounded="0" size="100">
+                          <v-img :src="item.featured_image" cover></v-img>
+                        </v-avatar>
+                      </div>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-window-item>
+
+              <v-window-item value="recent">
+                <v-row>
+                  <v-col v-for="(item, index) in recentPosts" :key="index" cols="12" class="py-1">
+                    <v-card class="v-card-styles">
+                      <div class="d-flex flex-no-wrap justify-space-between">
+                        <div class="content-container">
+                          <v-card-title class="card-title wrap">{{ item.title.rendered }}</v-card-title>
+                          <v-card-actions>
+                            <v-btn class="ms-1" size="small" variant="outlined" @click="leerMas(item.link)">Leer Más</v-btn>
+                            <div class="ml-3">
+                              <v-icon small class="mr-1">mdi-clock-outline</v-icon>
+                              {{ formatDate(item.date) }}
+                            </div>
+                          </v-card-actions>
+                        </div>
+                        <v-avatar rounded="0" size="100">
+                          <v-img :src="item.featured_image" cover></v-img>
+                        </v-avatar>
+                      </div>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-window-item>
             </v-window>
           </v-card-text>
         </v-card>
@@ -52,54 +122,64 @@ export default {
   name: 'TabMenu',
   data() {
     return {
-      tab: 'one',
+      tab: 'news',
+      newsPosts: [],
+      analysisPosts: [],
       recentPosts: [],
-      guidePosts: [],
-      topPosts: [],
       videoLoaded: false,
     };
   },
   mounted() {
+    this.fetchNewsPosts();
+    this.fetchAnalysisPosts();
     this.fetchRecentPosts();
-    this.fetchGuidePosts();
-    this.fetchTopPosts();
   },
   methods: {
     loadVideo() {
       this.videoLoaded = true;
     },
+    async fetchNewsPosts() {
+      try {
+        const response = await axios.get(
+          'https://wp.gremioktg.com/wp-json/wp/v2/posts?per_page=4&tags=14&_embed=true'
+        );
+        this.newsPosts = await this.fetchFeaturedImages(response.data);
+      } catch (error) {
+        console.error('Error fetching news posts:', error);
+      }
+    },
+    async fetchAnalysisPosts() {
+      try {
+        const response = await axios.get(
+          'https://wp.gremioktg.com/wp-json/wp/v2/posts?per_page=4&tags=18&_embed=true'
+        );
+        this.analysisPosts = await this.fetchFeaturedImages(response.data);
+      } catch (error) {
+        console.error('Error fetching analysis posts:', error);
+      }
+    },
     async fetchRecentPosts() {
       try {
-        const response = await axios.get('https://wp.gremioktg.com/wp-json/wp/v2/posts?per_page=4&_embed=true');
-        const posts = await this.fetchFeaturedImages(response.data);
-        this.recentPosts = posts;
+        const response = await axios.get(
+          'https://wp.gremioktg.com/wp-json/wp/v2/posts?per_page=4&orderby=date&order=desc&_embed=true'
+        );
+        this.recentPosts = await this.fetchFeaturedImages(response.data);
       } catch (error) {
         console.error('Error fetching recent posts:', error);
-      }
-    },
-    async fetchGuidePosts() {
-      try {
-        const response = await axios.get('https://wp.gremioktg.com/wp-json/wp/v2/posts?per_page=4&categories=1&_embed=true');
-        const posts = await this.fetchFeaturedImages(response.data);
-        this.guidePosts = posts;
-      } catch (error) {
-        console.error('Error fetching guide posts:', error);
-      }
-    },
-    async fetchTopPosts() {
-      try {
-        const response = await axios.get('https://wp.gremioktg.com/wp-json/wp/v2/posts?per_page=4&categories=8&orderby=date&order=desc&_embed=true');
-        const posts = await this.fetchFeaturedImages(response.data);
-        this.topPosts = posts;
-      } catch (error) {
-        console.error('Error fetching top posts:', error);
       }
     },
     async fetchFeaturedImages(posts) {
       const postPromises = posts.map(async (post) => {
         if (post.featured_media) {
-          const mediaResponse = await axios.get(`https://gremioktg.com/wp-json/wp/v2/media/${post.featured_media}`);
-          post.featured_image = mediaResponse.data.source_url;
+          try {
+            const mediaResponse = await axios.get(
+              `https://gremioktg.com/wp-json/wp/v2/media/${post.featured_media}`
+            );
+            post.featured_image = mediaResponse.data.source_url;
+          } catch (error) {
+            console.error(`Error fetching image for post ${post.id}:`, error);
+            post.featured_image = null;
+          }
         } else {
           post.featured_image = null;
         }
