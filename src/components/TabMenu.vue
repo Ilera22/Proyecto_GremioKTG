@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <v-row class="hero-container pa-3">
-      <div color="primary" style="min-height: 600px;" class="hero-video-container"></div>
+      <div color="primary" class="hero-video-container"></div>
       <v-col cols="12" md="7">
         <v-card >
           <v-responsive aspect-ratio="16:9" class="video-container">
@@ -11,7 +11,6 @@
               cover
               class="video-placeholder"
               alt="Video placeholder"
-              @click="loadVideo"
               style="cursor: pointer;"
             ></v-img>
             <iframe
@@ -19,7 +18,6 @@
               :src="videoUrl"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
               class="video-iframe"
             ></iframe>
           </v-responsive>
@@ -219,7 +217,7 @@ export default {
 
 .hero-video-container {
   height: 100%;
-  min-height: 600px;
+  min-height: 1920px;
 }
 
 .video-container {
