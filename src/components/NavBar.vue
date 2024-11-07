@@ -1,108 +1,37 @@
 <template>
-  <aside :class="['sidebar', { 'sidebar--collapsed': isCollapsed }]">
-    <div class="sidebar-header">
-      <div class="logo">
-        <img src="@/assets/logo_ktg.png" alt="Logo" />
-      </div>
-      <button class="toggle-button" @click="toggleSidebar">
-        <i v-if="isCollapsed" class="fas fa-chevron-right"></i>
-        <i v-else class="fas fa-chevron-left"></i>
-      </button>
-    </div>
+  <v-card>
+    <v-layout>
+      <v-navigation-drawer expand-on-hover rail>
+        <v-list>
+          <v-list-item
+            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+            subtitle="sandra_a88@gmailcom"
+            title="Sandra Adams"
+          ></v-list-item>
+        </v-list>
 
-    <nav class="menu">
-      <ul>
-        <li v-for="item in items" :key="item.id" @click="navigate(item)">
-          <img :src="require(`${item.icon}`)" alt="Icono del juego" />
-          <span v-if="!isCollapsed">{{ item.name }}</span>
-        </li>
-      </ul>
-    </nav>
-  </aside>
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
+          <v-list-item
+            prepend-icon="mdi-folder"
+            title="My Files"
+            value="myfiles"
+          ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-account-multiple"
+            title="Shared with me"
+            value="shared"
+          ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-star"
+            title="Starred"
+            value="starred"
+          ></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <v-main style="height: 250px"></v-main>
+    </v-layout>
+  </v-card>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      isCollapsed: true,
-      items: [
-        { id: 1, name: 'Diablo IV', icon: '@/assets/logo_ktg.png' },
-        { id: 2, name: 'World of Warcraft', icon: '@/assets/logo_ktg.png' },
-        { id: 3, name: 'Elden Ring', icon: '@/assets/logo_ktg.png' },
-        // Añade más juegos según lo necesites
-      ],
-    };
-  },
-  methods: {
-    toggleSidebar() {
-      this.isCollapsed = !this.isCollapsed;
-    },
-    navigate(item) {
-      this.$router.push({ name: 'game-page', params: { id: item.id } });
-    },
-  },
-};
-</script>
-
-<style>
-.sidebar {
-  background-color: var(--sidebar-bg);
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 80px;
-  height: 100vh;
-  transition: width 0.3s;
-  overflow: hidden;
-}
-
-.sidebar--collapsed {
-  width: 250px;
-}
-
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.logo img {
-  width: 40px;
-  height: auto;
-}
-
-.toggle-button {
-  background: none;
-  border: none;
-  color: var(--accent-color);
-  cursor: pointer;
-}
-
-.menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.menu ul li {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  transition: background 0.3s;
-}
-
-.menu ul li:hover {
-  background-color: var(--hover-color);
-}
-
-.menu ul li img {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
-}
-
-.menu ul li span {
-  color: var(--text-color);
-}
-</style>
