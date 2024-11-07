@@ -200,7 +200,7 @@ export default {
 .video-container {
   width: 100%;
   height:fit-content;
-  min-height: 800px;
+  min-height: 500px;
 }
 
 .video-placeholder {
