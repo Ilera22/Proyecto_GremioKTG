@@ -2,9 +2,9 @@
   <v-main>
     <v-row class="hero-container pa-3">
       <div style="background-color: var(--v-theme-primary); height: 300px;"></div>
-      <v-col cols="12" md="7" style="min-height: 800px;">
+      <v-col cols="12" md="7">
         <v-card color="teal">
-          <v-responsive aspect-ratio="16:9" class="video-container">
+          <v-responsive aspect-ratio="16:9" class="video-container" style="min-height: 1300px;"></>
             <iframe width="100%" min-height="100%" 
             src="https://www.youtube.com/embed/oAMG-mcXl_E?si=avXUDdHRJLMSmY21" 
             title="YouTube video player" 
@@ -212,6 +212,7 @@ export default {
 .video-container {
   width: 100%;
   min-height: 600px;
+  background-color: yellow;
 }
 
 .video-placeholder {
