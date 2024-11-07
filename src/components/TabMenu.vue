@@ -4,21 +4,25 @@
       <div style="height: 300px;"></div>
       <v-col cols="12" md="7">
         <v-card>
-          <v-img height="300px" src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-img>
-          <v-card-title>Titulo1</v-card-title>
-          <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
-          <div class="d-flex justify-end">
-            <v-btn color="orange" class="mr-3 mb-3">Explore</v-btn>
-          </div>
+          
+          <v-responsive aspect-ratio="16/9">
+    <iframe
+      src="https://www.youtube.com/embed/ZZ5LpwO-An4"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </v-responsive>
+
         </v-card>
       </v-col>
 
       <v-col cols="12" md="5">
         <v-card>
           <v-tabs v-model="tab" bg-color="primary" align-tabs="center">
-            <v-tab value="one">News</v-tab>
-            <v-tab value="two">Reviews</v-tab>
-            <v-tab value="three">Hot</v-tab>
+            <v-tab value="one">Noticias</v-tab>
+            <v-tab value="two">Analisis</v-tab>
+            <v-tab value="three">Top</v-tab>
           </v-tabs>
 
           <v-card-text>
@@ -105,6 +109,7 @@
 <script>
 import axios from 'axios';
 import { format } from 'date-fns';
+import { VResponsive } from 'vuetify/components';
 
 export default {
   name: 'TabMenu',
